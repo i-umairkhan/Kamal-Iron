@@ -1,3 +1,4 @@
+from asyncio import transports
 from cgitb import text
 from functools import total_ordering
 from tkinter import *
@@ -23,7 +24,7 @@ canvas.place(x = 0, y = 0)
 # *** BACKGROUD IMAGE *************************************
 background_img = PhotoImage(file = f"background.png")
 background = canvas.create_image(
-    499, 288,
+    499, 294,
     image=background_img)
 
 
@@ -35,17 +36,29 @@ date_time = datetime.date.today()
 
 # *** CUSTOMER INFO INPUTS ********************************
 
-name = Entry(bd=0, bg="#C4C4C4", highlightthickness=0)
+name = Entry(bd=0, bg="#E5E5E5", highlightthickness=0)
 name.place(x=94, y=69, width=146, height=27)
 
-address = Entry(bd=0, bg="#C4C4C4", highlightthickness=0)
+address = Entry(bd=0, bg="#E5E5E5", highlightthickness=0)
 address.place(x=336, y=69, width=146, height=27)
 
-phone1 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0)
+phone1 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0)
 phone1.place(x=579, y=69, width=146, height=27)
 
-phone2 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0)
+phone2 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0)
 phone2.place(x=827, y=69, width=146, height=27)
+
+Labour = Entry(bd=0, bg="#E5E5E5", highlightthickness=0)
+Labour.place(x=787, y=141, width=146, height=27)
+Labour.insert(0,0)
+
+Transport = Entry(bd=0, bg="#E5E5E5", highlightthickness=0)
+Transport.place(x=787, y=183, width=146, height=27)
+Transport.insert(0,0)
+
+OtherAmount = Entry(bd=0, bg="#E5E5E5", highlightthickness=0)
+OtherAmount.place(x=787, y=225, width=146, height=27)
+OtherAmount.insert(0,0)
 
 # *********************************************************
 
@@ -108,69 +121,81 @@ item7 = StringVar()
 DropDown7 = OptionMenu(window,item7,*DropDownItems)
 DropDown7.place(x=42,y=487)
 
+item8 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+item8.place(x=42, y=537, width=112, height=23)
+
+
 # *********************************************************
 
 # *** RATE INPUTS *****************************************
 
-rate1 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+rate1 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 rate1.place(x=240, y=175, width=82, height=23)
 rate1.insert(0,0)
 
-rate2 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+rate2 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 rate2.place(x=240, y=227, width=82, height=23)
 rate2.insert(0,0)
 
-rate3 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+rate3 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 rate3.place(x=240, y=279, width=82, height=23)
 rate3.insert(0,0)
 
-rate4 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+rate4 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 rate4.place(x=240, y=331, width=82, height=23)
 rate4.insert(0,0)
 
-rate5 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+rate5 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 rate5.place(x=240, y=383, width=82, height=23)
 rate5.insert(0,0)
 
-rate6 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+rate6 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 rate6.place(x=240, y=435, width=82, height=23)
 rate6.insert(0,0)
 
-rate7 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+rate7 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 rate7.place(x=240, y=487, width=82, height=23)
 rate7.insert(0,0)
+
+rate8 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+rate8.place(x=240, y=537, width=82, height=23)
+rate8.insert(0,0)
 
 # *********************************************************
 
 # *** WEIGHT INPUTS ***************************************
 
-Weight1 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+Weight1 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 Weight1.place(x=354, y=175, width=82, height=23)
 Weight1.insert(0,0)
 
-Weight2 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+Weight2 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 Weight2.place(x=354, y=227, width=82, height=23)
 Weight2.insert(0,0)
 
-Weight3 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+Weight3 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 Weight3.place(x=354, y=279, width=82, height=23)
 Weight3.insert(0,0)
 
-Weight4 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+Weight4 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 Weight4.place(x=354, y=331, width=82, height=23)
 Weight4.insert(0,0)
 
-Weight5 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+Weight5 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 Weight5.place(x=354, y=383, width=82, height=23)
 Weight5.insert(0,0)
 
-Weight6 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+Weight6 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 Weight6.place(x=354, y=435, width=82, height=23)
 Weight6.insert(0,0)
 
-Weight7 = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+Weight7 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 Weight7.place(x=354, y=487, width=82, height=23)
 Weight7.insert(0,0)
+
+Weight8 = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+Weight8.place(x=354, y=537, width=82, height=23)
+Weight8.insert(0,0)
 
 # *********************************************************
 
@@ -199,8 +224,11 @@ def CalcTotal():
 
     total7 = Label(text= (int(rate7.get()) * int(Weight7.get()) ),padx=10,pady=3,background="#C4C4C4",font="height=20")
     total7.place(x=460,y=487)
+
+    total8 = Label(text= (int(rate8.get()) * int(Weight8.get()) ),padx=10,pady=3,background="#C4C4C4",font="height=20")
+    total8.place(x=460,y=537)
     
-    GrandTotal = (float(rate1.get()) * float(Weight1.get()))+(float(rate2.get()) * float(Weight2.get()))+(float(rate3.get()) * float(Weight3.get()))+(float(rate4.get()) * float(Weight4.get()))+(float(rate5.get()) * float(Weight5.get()))+(float(rate6.get()) * float(Weight6.get()))+(float(rate7.get()) * float(Weight7.get()))
+    GrandTotal = (float(rate1.get()) * float(Weight1.get()))+(float(rate2.get()) * float(Weight2.get()))+(float(rate3.get()) * float(Weight3.get()))+(float(rate4.get()) * float(Weight4.get()))+(float(rate5.get()) * float(Weight5.get()))+(float(rate6.get()) * float(Weight6.get()))+(float(rate7.get()) * float(Weight7.get()))+(float(rate8.get()) * float(Weight8.get()))+float(Labour.get())+float(Transport.get())+float(OtherAmount.get())
 
     Grand = Label(text=GrandTotal,padx=10,pady=3,background="#C4C4C4",font="height=10")
     Grand.place(x=662,y=295)
@@ -211,21 +239,21 @@ def CalcTotal():
 # *** TOTAL BUTTON ****************************************
 
 TotalButton = Button(window,text="Total",command=CalcTotal,padx=20,pady=5,background="#797766",fg="#ffffff")
-TotalButton.place(x=592,y=175)
+TotalButton.place(x=885,y=385)
 
 # *********************************************************
 
 # *** PAYMENT INFO INPUTS *********************************
 
-recived = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+recived = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 recived.insert(0,0)
 recived.place(x=592, y=394, width=178, height=27)
 
-remaning = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+remaning = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 remaning.insert(0,0)
 remaning.place(x=592, y=472, width=178, height=27)
 
-dueDate = Entry(bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+dueDate = Entry(bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
 dueDate.place(x=592, y=547, width=178, height=27)
 
 
@@ -234,11 +262,14 @@ dueDate.place(x=592, y=547, width=178, height=27)
 # *** DATA SAVEING ****************************************
 
 def SaveData():
-    total =((float(rate1.get()) * float(Weight1.get()))+(float(rate2.get()) * float(Weight2.get()))+(float(rate3.get()) * float(Weight3.get()))+(float(rate4.get()) * float(Weight4.get()))+(float(rate5.get()) * float(Weight5.get()))+(float(rate6.get()) * float(Weight6.get()))+(float(rate7.get()) * float(Weight7.get()))),
+    total =((float(rate1.get()) * float(Weight1.get()))+(float(rate2.get()) * float(Weight2.get()))+(float(rate3.get()) * float(Weight3.get()))+(float(rate4.get()) * float(Weight4.get()))+(float(rate5.get()) * float(Weight5.get()))+(float(rate6.get()) * float(Weight6.get()))+(float(rate7.get()) * float(Weight7.get()))+(float(rate8.get()) * float(Weight8.get()))+float(Labour.get())+float(Transport.get())+float(OtherAmount.get()))
     df = pd.DataFrame([[date_time, name.get(),address.get(),
                         phone1.get(),phone2.get(),
-                        ((float(rate1.get()) * float(Weight1.get()))+(float(rate2.get()) * float(Weight2.get()))+(float(rate3.get()) * float(Weight3.get()))+(float(rate4.get()) * float(Weight4.get()))+(float(rate5.get()) * float(Weight5.get()))+(float(rate6.get()) * float(Weight6.get()))+(float(rate7.get()) * float(Weight7.get()))),
+                        total,
                         recived.get(),remaning.get(),dueDate.get(),
+                        Labour.get(),
+                        Transport.get(),
+                        OtherAmount.get(),
                         (item1.get(),rate1.get(),Weight1.get()),
                         (item2.get(),rate2.get(),Weight2.get()),
                         (item3.get(),rate3.get(),Weight3.get()),
@@ -246,6 +277,7 @@ def SaveData():
                         (item5.get(),rate5.get(),Weight5.get()),
                         (item6.get(),rate6.get(),Weight6.get()),
                         (item7.get(),rate7.get(),Weight7.get()),
+                        (item8.get(),rate8.get(),Weight8.get()),
                         ]])
     df.to_csv("customers.csv",mode='a',header=None,index=None)
 
@@ -255,7 +287,7 @@ def SaveData():
 # *** SAVE BUTTON ****************************************
 
 SaveButton = Button(window,text="Save Data",command=SaveData,padx=8,pady=5,background="#797766",fg="#ffffff")
-SaveButton.place(x=592,y=227)
+SaveButton.place(x=885,y=461)
 
 # *********************************************************
 
