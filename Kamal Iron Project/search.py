@@ -30,17 +30,23 @@ name.place(x=493, y=70, width=320, height=28)
 
 def showname():
     df = pd.read_csv("customers.csv")
-    df = pd.DataFrame(df[df["Name"]==name.get()])
-    
-    CustomerDate = df.iloc[0,0]
-    CustomerName = df.iloc[0,1]
-    CustomerAddress = df.iloc[0,2]
-    CustomerPhone1 = df.iloc[0,3]
-    CustomerPhone2 = df.iloc[0,4]
-    CustomerTotal = df.iloc[0,5]
-    CustomerRecived = df.iloc[0,6]
-    CustomerRemaning = df.iloc[0,7]
-    CustomerDueDate = df.iloc[0,8]
+    df = pd.DataFrame(df)
+    df.sort_values(['Date','  Payment Remaning  '],ascending=False,inplace=True)
+    for i in range(len(df)):
+        if(df.loc[i,"Name"]==name.get()):
+            df = pd.DataFrame(df[df["Name"]==name.get()])
+            CustomerDate = df.iloc[0,0]
+            CustomerName = df.iloc[0,1]
+            CustomerAddress = df.iloc[0,2]
+            CustomerPhone1 = df.iloc[0,3]
+            CustomerPhone2 = df.iloc[0,4]
+            CustomerTotal = df.iloc[0,5]
+            CustomerRecived = df.iloc[0,6]
+            CustomerRemaning = df.iloc[0,7]
+            CustomerDueDate = df.iloc[0,8]
+            break
+   
+
 
     global dataDate,dataName,dataAddress,dataPhone1,dataPhone2,dataTotal,dataRecived,dataRemaning,dataDueDate
 
