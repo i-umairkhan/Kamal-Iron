@@ -229,7 +229,7 @@ def CalcTotal():
     Grand.place(x=700,y=305)
 
     remaning.delete(0,END)
-    remaningAmount = int(GrandTotal) - int(recived.get()) + int(CustomerRemaning)
+    remaningAmount = float(GrandTotal) - int(recived.get()) + int(CustomerRemaning)
     remaning.insert(0,remaningAmount)
     remaning.place(x=710, y=449, width=178, height=27)
 
@@ -272,14 +272,14 @@ def SaveData():
                         phone1.get(),phone2.get(),
                         total,
                         recived.get(),remaning.get(),str(dueDate.get()),
-                        (item1.get(),rate1.get(),Weight1.get()),
-                        (item2.get(),rate2.get(),Weight2.get()),
-                        (item3.get(),rate3.get(),Weight3.get()),
-                        (item4.get(),rate4.get(),Weight4.get()),
-                        (item5.get(),rate5.get(),Weight5.get()),
-                        (item6.get(),rate6.get(),Weight6.get()),
-                        (item7.get(),rate7.get(),Weight7.get()),
-                        (item8.get(),rate8.get(),Weight8.get()),
+                        (item1.get(),Weight1.get(),rate1.get()),
+                        (item2.get(),Weight2.get(),rate2.get()),
+                        (item3.get(),Weight3.get(),rate3.get()),
+                        (item4.get(),Weight4.get(),rate4.get()),
+                        (item5.get(),Weight5.get(),rate5.get()),
+                        (item6.get(),Weight6.get(),rate6.get()),
+                        (item7.get(),Weight7.get(),rate7.get()),
+                        (item8.get(),Weight8.get(),rate8.get()),
                         ]])
     df.to_csv("Csv\\customers.csv",mode='a',header=None,index=None)
 
