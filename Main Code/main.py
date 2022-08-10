@@ -1,8 +1,11 @@
+from enum import auto
 from tkinter import *
 import datetime
 from tkinter import ttk
 import pandas as pd
 from operator import ge
+from fpdf import FPDF
+
 
 
 window = Tk()
@@ -1360,8 +1363,6 @@ def records():
                 tree.insert(i,END,values=(item1,item2,item3,item4,item5,item6,item7,item8))
                 j = j+1
 
-
-
     # *********************************************************
 
     # *** CLEAR FUNCTION **************************************
@@ -1371,12 +1372,117 @@ def records():
         for i in tree.get_children():
             tree.delete(i)
     # *********************************************************
+    
+    # *** PDF FUNCTION ****************************************
+    def pdfFun():
+        class PDF(FPDF):
+            def header(self):
+                self.set_font('helvetica','B',25)
+                self.set_text_color(16, 104, 205)
+                self.cell(0,10,"Kamal Iron Store Chakwal")
+                self.ln(20)
+
+        pdf = PDF('P','mm','A4')
+        pdf.add_page()
+        pdf.set_font('helvetica','',16)
+        pdf.set_text_color(0,0,0)
+
+        global nouser
+        nouser = Label(recordPage,text= "",background="#ffffff",font="height=20")
+        df = pd.read_csv("Csv//customers.csv")
+        df = pd.DataFrame(df)
+        df.sort_values(['DateTime'],ascending=True,inplace=True)
+        df = df.loc[df["Name"]==name.get()]
+        df2 = pd.read_csv("Csv//advance.csv")
+        df2 = pd.DataFrame(df2)
+        df2.sort_values(['DateTime'],ascending=True,inplace=True)
+        df2 = df2.loc[df2["Name"]==name.get()]
+        global CustomerAdvance
+        CustomerAdvance=0
+        j = 0
+        for i in range(len(df)):
+                CustomerDate = df.iloc[j,1]
+                CustomerName = df.iloc[j,2]
+                CustomerAddress = df.iloc[j,3]
+                CustomerPhone1 = int(df.iloc[j,4])
+                CustomerAdvance = int(df2.iloc[j,7])
+                CustomerTotal = int(df.iloc[j,6])
+                CustomerRecived = int(df.iloc[j,7])
+                CustomerRemaning = int(df.iloc[j,8])
+                CustomerDueDate = df.iloc[j,9]
+                item1 = df.iloc[j,10]
+                item2 = df.iloc[j,11]
+                item3 = df.iloc[j,12]
+                item4 = df.iloc[j,13]
+                item5 = df.iloc[j,14]
+                item6 = df.iloc[j,15]
+                item7 = df.iloc[j,16]
+                item8 = df.iloc[j,17]
+                pdf.set_font('helvetica','',14)
+                pdf.set_text_color(0,0,0)
+                if(i<1):
+                    pdf.cell(15,0,"Name:")
+                    pdf.cell(45,0,CustomerName)
+                    pdf.cell(20,0,"Address:")
+                    pdf.cell(50,0,CustomerAddress)
+                    pdf.cell(22,0,"PhoneNo:")
+                    pdf.cell(40,0,str(CustomerPhone1))
+                    pdf.ln(15)
+                pdf.cell(30,10,"Date",border=True)
+                pdf.cell(30,10,"Advance",border=True)
+                pdf.cell(30,10,"Total",border=True)
+                pdf.cell(30,10,"Recived",border=True)
+                pdf.cell(30,10,"Remaning",border=True)
+                pdf.cell(30,10,"DueDate",border=True)
+                pdf.ln()
+                pdf.set_font('helvetica','',14)
+                pdf.cell(30,10,str(CustomerDate),border=True)
+                pdf.cell(30,10,str(CustomerAdvance),border=True)
+                pdf.cell(30,10,str(CustomerTotal),border=True)
+                pdf.cell(30,10,str(CustomerRecived),border=True)
+                pdf.cell(30,10,str(CustomerRemaning),border=True)
+                pdf.cell(30,10,str(CustomerDueDate),border=True)
+                pdf.ln(10)
+                if(str(item1)!="('', '0', '0')" and (item1)!=0):
+                    pdf.cell(180,10,str(item1),border=True)
+                    pdf.ln()
+                if(str(item2)!="('', '0', '0')"and str(item2)==0):
+                    pdf.cell(180,10,str(item2),border=True)
+                    pdf.ln()
+                if(str(item3)!="('', '0', '0')"and (item3)==0):
+                    pdf.cell(180,10,str(item3),border=True)
+                    pdf.ln()
+                if(str(item4)!="('', '0', '0')"and (item4)==0):
+                    pdf.cell(180,10,str(item4),border=True)
+                    pdf.ln()
+                if(str(item5)!="('', '0', '0')"and (item5)==0):
+                    pdf.cell(180,10,str(item5),border=True)
+                    pdf.ln()
+                if(str(item6)!="('', '0', '0')"and (item6)==0):
+                    pdf.cell(180,10,str(item6),border=True)
+                    pdf.ln()
+                if(str(item7)!="('', '0', '0')"and (item7)==0):
+                    pdf.cell(180,10,str(item7),border=True)
+                    pdf.ln()
+                if(str(item8)!="('', '0', '0')"and (item8)==0):
+                    pdf.cell(180,10,str(item8),border=True)
+                    pdf.ln()
+                pdf.ln(10)
+                tree.insert("",END,iid=i,open=False,values=(CustomerDate,CustomerName,CustomerAddress,
+                                    CustomerPhone1,CustomerAdvance,CustomerTotal,CustomerRecived,CustomerRemaning,CustomerDueDate))
+                tree.insert(i,END,values=(item1,item2,item3,item4,item5,item6,item7,item8))
+                j = j+1
+        pdf.output(str(CustomerName)+".pdf")
+
+    # *********************************************************
 
     # *** BUTTONS *********************************************
     SearchButton = Button(recordPage,text="Search",command=showname,padx=8,pady=5,background="#47B759",fg="#ffffff")
     SearchButton.place(x=733,y=70)
     ClearButton = Button(recordPage,text="Clear",command=clearfun,padx=8,pady=5,background="#db5353",fg="#ffffff")
     ClearButton.place(x=814,y=70)
+    ClearButton = Button(recordPage,text="PDF",command=pdfFun,padx=8,pady=5,background="#47B759",fg="#ffffff")
+    ClearButton.place(x=884,y=70)
     # *********************************************************
 
 
