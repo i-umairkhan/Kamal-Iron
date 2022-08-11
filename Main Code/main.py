@@ -1,13 +1,17 @@
+from enum import auto
 from tkinter import *
 import datetime
 from tkinter import ttk
 import pandas as pd
 from operator import ge
+from fpdf import FPDF
+
 
 
 window = Tk()
 
 window.geometry("999x599")
+window.title("Kamal Iron Customers Manangment System")
 window.configure(bg = "#ffffff")
 canvas = Canvas(
     window,
@@ -19,7 +23,7 @@ canvas = Canvas(
     relief = "ridge")
 canvas.place(x = 0, y = 0)
 
-background_img = PhotoImage(file = f"Images\main.png")
+background_img = PhotoImage(file = f"Images//main.png")
 background = canvas.create_image(
     499, 300,
     image=background_img)
@@ -30,6 +34,7 @@ def advance():
 
     advancePage.geometry("999x599")
     advancePage.configure(bg = "#ffffff")
+    advancePage.title("Advance Payments")
     canvas = Canvas(
         advancePage,
         bg = "#ffffff",
@@ -40,7 +45,7 @@ def advance():
         relief = "ridge")
     canvas.place(x = 0, y = 0)
 
-    background_img = PhotoImage(file = f"Images\\advance.png")
+    background_img = PhotoImage(file = f"Images//advance.png")
     background = canvas.create_image(
         499, 219,
         image=background_img)
@@ -90,14 +95,14 @@ def advance():
                             phone1.get(),phone2.get(),
                             details.get(),amount.get()
                             ]])
-        df.to_csv("Csv\\advance.csv",mode='a',header=None,index=None)
+        df.to_csv("Csv//advance.csv",mode='a',header=None,index=None)
 
     def SaveData2():
         df2 = pd.DataFrame([[str(date_time),date_, name.get(),address.get(),
                             phone1.get(),phone2.get(),0,0,-abs(int(amount.get())),0
                             ,0,0,0,0,0,0,0,0
                             ]])
-        df2.to_csv("Csv\\customers.csv",mode='a',header=None,index=None)
+        df2.to_csv("Csv//customers.csv",mode='a',header=None,index=None)
         advancePage.destroy()
 
     # *********************************************************
@@ -126,6 +131,7 @@ def entry():
     entryPage = Toplevel()
 
     entryPage.geometry("999x599")
+    entryPage.title("Customer Entry")
     entryPage.configure(bg = "#ffffff")
     # *** CANVAS **********************************************
     canvas = Canvas(
@@ -139,7 +145,7 @@ def entry():
     canvas.place(x = 0, y = 0)
 
     # *** BACKGROUD IMAGE *************************************
-    background_img = PhotoImage(file = f"Images\\CustomerEntry.png")
+    background_img = PhotoImage(file = f"Images//CustomerEntry.png")
     background = canvas.create_image(
         499, 294,
         image=background_img)
@@ -231,82 +237,80 @@ def entry():
     DropDown7 = OptionMenu(entryPage,item7,*DropDownItems)
     DropDown7.place(x=42,y=487)
 
-
-    item8 = Entry(entryPage,bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
-    item8.place(x=42, y=537, width=112, height=23)
-
-
     # *********************************************************
 
-    # *** RATE INPUTS *****************************************
+    # *** RATE INPUTS AND WEIGHT INPUTS ***********************
 
     Weight1 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     Weight1.place(x=240, y=175, width=82, height=23)
     Weight1.insert(0,0)
 
+    rate1 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    rate1.place(x=354, y=175, width=82, height=23)
+    rate1.insert(0,0)
+
     Weight2 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     Weight2.place(x=240, y=227, width=82, height=23)
     Weight2.insert(0,0)
+    
+    rate2 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    rate2.place(x=354, y=227, width=82, height=23)
+    rate2.insert(0,0)
 
     Weight3 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     Weight3.place(x=240, y=279, width=82, height=23)
     Weight3.insert(0,0)
 
-    Weight4 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight4.place(x=240, y=331, width=82, height=23)
-    Weight4.insert(0,0)
-
-    Weight5 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight5.place(x=240, y=383, width=82, height=23)
-    Weight5.insert(0,0)
-
-    Weight6 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight6.place(x=240, y=435, width=82, height=23)
-    Weight6.insert(0,0)
-
-    Weight7 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight7.place(x=240, y=487, width=82, height=23)
-    Weight7.insert(0,0)
-
-    Weight8 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight8.place(x=240, y=537, width=82, height=23)
-    Weight8.insert(0,0)
-
-    # *********************************************************
-
-    # *** WEIGHT INPUTS ***************************************
-
-    rate1 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    rate1.place(x=354, y=175, width=82, height=23)
-    rate1.insert(0,0)
-
-    rate2 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    rate2.place(x=354, y=227, width=82, height=23)
-    rate2.insert(0,0)
-
     rate3 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate3.place(x=354, y=279, width=82, height=23)
     rate3.insert(0,0)
+
+    Weight4 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight4.place(x=240, y=331, width=82, height=23)
+    Weight4.insert(0,0)
 
     rate4 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate4.place(x=354, y=331, width=82, height=23)
     rate4.insert(0,0)
 
+    Weight5 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight5.place(x=240, y=383, width=82, height=23)
+    Weight5.insert(0,0)
+
     rate5 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate5.place(x=354, y=383, width=82, height=23)
     rate5.insert(0,0)
+
+    Weight6 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight6.place(x=240, y=435, width=82, height=23)
+    Weight6.insert(0,0)
 
     rate6 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate6.place(x=354, y=435, width=82, height=23)
     rate6.insert(0,0)
 
+    Weight7 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight7.place(x=240, y=487, width=82, height=23)
+    Weight7.insert(0,0)
+
     rate7 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate7.place(x=354, y=487, width=82, height=23)
     rate7.insert(0,0)
 
+    Weight8 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight8.place(x=240, y=537, width=82, height=23)
+    Weight8.insert(0,0)
+
     rate8 = Entry(entryPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate8.place(x=354, y=537, width=82, height=23)
     rate8.insert(0,0)
+
+    # *********************************************************
+
+    # *** DROPDOWN LAST ITEM INPUT ****************************
+    
+    item8 = Entry(entryPage,bd=0, bg="#C4C4C4", highlightthickness=0,font="hight=20")
+    item8.place(x=42, y=537, width=112, height=23)
 
     # *********************************************************
 
@@ -395,13 +399,13 @@ def entry():
                             (item7.get(),Weight7.get(),rate7.get()),
                             (item8.get(),Weight8.get(),rate8.get()),
                             ]])
-        df.to_csv("Csv\\customers.csv",mode='a',header=None,index=None)
+        df.to_csv("Csv//customers.csv",mode='a',header=None,index=None)
 
         df2 = pd.DataFrame([[str(date_time),date_, name.get(),address.get(),
                             phone1.get(),phone2.get(),
                             details.get(),Advance.get()
                             ]])
-        df2.to_csv("Csv\\advance.csv",mode='a',header=None,index=None)
+        df2.to_csv("Csv//advance.csv",mode='a',header=None,index=None)
         entryPage.destroy()
 
     # *********************************************************
@@ -417,7 +421,7 @@ def entry():
     # *** SEARCH FUNCTION *************************************
 
     def searchfun():
-        df = pd.read_csv("Csv\\customers.csv")
+        df = pd.read_csv("Csv//customers.csv")
         df = pd.DataFrame(df)
         df.sort_values(['DateTime'],ascending=False,inplace=True)
         for i in range(len(df)):
@@ -448,7 +452,7 @@ def entry():
 
     def searchfun2():
         global customerAdvance , customerAdvanceDetails,details
-        df = pd.read_csv("Csv\\advance.csv")
+        df = pd.read_csv("Csv//advance.csv")
         df = pd.DataFrame(df)
         df.sort_values(['DateTime'],ascending=False,inplace=True)
         for i in range(len(df)):
@@ -531,6 +535,7 @@ def reciving():
     recivingPage = Toplevel()
 
     recivingPage.geometry("999x599")
+    recivingPage.title("Payments REcivings")
     recivingPage.configure(bg = "#ffffff")
     # *** CANVAS **********************************************
     canvas = Canvas(
@@ -544,7 +549,7 @@ def reciving():
     canvas.place(x = 0, y = 0)
 
     # *** BACKGROUD IMAGE *************************************
-    background_img = PhotoImage(file = f"Images\\RecivingPage.png")
+    background_img = PhotoImage(file = f"Images//RecivingPage.png")
     background = canvas.create_image(
         499, 189,
         image=background_img)
@@ -579,7 +584,7 @@ def reciving():
 
     # *** SEARCH FUNCTION *************************************
     def searchfun():
-        df = pd.read_csv("Csv\\customers.csv")
+        df = pd.read_csv("Csv//customers.csv")
         df = pd.DataFrame(df)
         df.sort_values(['DateTime'],ascending=False,inplace=True)
         for i in range(len(df)):
@@ -655,13 +660,13 @@ def reciving():
                                 phone1.get(),phone2.get(),0,
                                 recived.get(),remaning.get(),dueDate.get(),
                                 "Payment Recived",0,0,0,0,0,0,0]])
-        df.to_csv("Csv\\customers.csv",mode='a',header=None,index=None)
+        df.to_csv("Csv//customers.csv",mode='a',header=None,index=None)
         
         df2 = pd.DataFrame([[str(date_time),date_, name.get(),address.get(),
                             phone1.get(),phone2.get(),
                             " ",0
                             ]])
-        df2.to_csv("Csv\\advance.csv",mode='a',header=None,index=None)
+        df2.to_csv("Csv//advance.csv",mode='a',header=None,index=None)
         recivingPage.destroy()
     # *********************************************************
 
@@ -687,6 +692,7 @@ def returning():
     returnPage = Toplevel()
 
     returnPage.geometry("999x599")
+    returnPage.title("Item Returning")
     returnPage.configure(bg = "#ffffff")
     canvas = Canvas(
         returnPage,
@@ -698,7 +704,7 @@ def returning():
         relief = "ridge")
     canvas.place(x = 0, y = 0)
 
-    background_img = PhotoImage(file = f"Images\\Returning.png")
+    background_img = PhotoImage(file = f"Images//Returning.png")
     background = canvas.create_image(
         499, 294,
         image=background_img)
@@ -791,58 +797,53 @@ def returning():
 
     # *********************************************************
 
-    # *** RATE INPUTS *****************************************
+    # *** WEIGHT AND RATE INPUTS ******************************
 
     Weight1 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     Weight1.place(x=240, y=175, width=82, height=23)
     Weight1.insert(0,0)
-    Weight2 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight2.place(x=240, y=227, width=82, height=23)
-    Weight2.insert(0,0)
-    Weight3 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight3.place(x=240, y=279, width=82, height=23)
-    Weight3.insert(0,0)
-    Weight4 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight4.place(x=240, y=331, width=82, height=23)
-    Weight4.insert(0,0)
-    Weight5 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight5.place(x=240, y=383, width=82, height=23)
-    Weight5.insert(0,0)
-    Weight6 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight6.place(x=240, y=435, width=82, height=23)
-    Weight6.insert(0,0)
-    Weight7 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight7.place(x=240, y=487, width=82, height=23)
-    Weight7.insert(0,0)
-    Weight8 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
-    Weight8.place(x=240, y=537, width=82, height=23)
-    Weight8.insert(0,0)
-
-    # *********************************************************
-
-    # *** WEIGHT INPUTS ***************************************
-
     rate1 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate1.place(x=354, y=175, width=82, height=23)
     rate1.insert(0,0)
+    Weight2 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight2.place(x=240, y=227, width=82, height=23)
+    Weight2.insert(0,0)
     rate2 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate2.place(x=354, y=227, width=82, height=23)
     rate2.insert(0,0)
+    Weight3 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight3.place(x=240, y=279, width=82, height=23)
+    Weight3.insert(0,0)
     rate3 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate3.place(x=354, y=279, width=82, height=23)
     rate3.insert(0,0)
+    Weight4 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight4.place(x=240, y=331, width=82, height=23)
+    Weight4.insert(0,0)
     rate4 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate4.place(x=354, y=331, width=82, height=23)
     rate4.insert(0,0)
+    Weight5 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight5.place(x=240, y=383, width=82, height=23)
+    Weight5.insert(0,0)
     rate5 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate5.place(x=354, y=383, width=82, height=23)
     rate5.insert(0,0)
+    Weight6 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight6.place(x=240, y=435, width=82, height=23)
+    Weight6.insert(0,0)
     rate6 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate6.place(x=354, y=435, width=82, height=23)
     rate6.insert(0,0)
+    Weight7 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight7.place(x=240, y=487, width=82, height=23)
+    Weight7.insert(0,0)
     rate7 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate7.place(x=354, y=487, width=82, height=23)
     rate7.insert(0,0)
+    Weight8 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
+    Weight8.place(x=240, y=537, width=82, height=23)
+    Weight8.insert(0,0)
     rate8 = Entry(returnPage,bd=0, bg="#E5E5E5", highlightthickness=0,font="hight=20")
     rate8.place(x=354, y=537, width=82, height=23)
     rate8.insert(0,0)
@@ -912,7 +913,7 @@ def returning():
     # *** SEARCH FUNCTION *************************************
 
     def searchfun():
-        df = pd.read_csv("Csv\\customers.csv")
+        df = pd.read_csv("Csv//customers.csv")
         df = pd.DataFrame(df)
         df.sort_values(['DateTime'],ascending=False,inplace=True)
         for i in range(len(df)):
@@ -982,13 +983,13 @@ def returning():
                             (item7.get(),Weight7.get(),rate7.get()),
                             (item8.get(),Weight8.get(),rate8.get()),
                             ]])
-        df.to_csv("Csv\\customers.csv",mode='a',header=None,index=None)
+        df.to_csv("Csv//customers.csv",mode='a',header=None,index=None)
         
         df2 = pd.DataFrame([[str(date_time),date_, name.get(),address.get(),
                             phone1.get(),phone2.get(),
                             " ",0
                             ]])
-        df2.to_csv("Csv\\advance.csv",mode='a',header=None,index=None)
+        df2.to_csv("Csv//advance.csv",mode='a',header=None,index=None)
         returnPage.destroy()
 
     # *********************************************************
@@ -1018,6 +1019,7 @@ def mill():
     millPage = Toplevel()
 
     millPage.geometry("999x599")
+    millPage.title("Mill Payments")
     millPage.configure(bg = "#ffffff")
     canvas = Canvas(
         millPage,
@@ -1029,7 +1031,7 @@ def mill():
         relief = "ridge")
     canvas.place(x = 0, y = 0)
 
-    background_img = PhotoImage(file = f"Images\\mills.png")
+    background_img = PhotoImage(file = f"Images//mills.png")
     background = canvas.create_image(
         499, 194,
         image=background_img)
@@ -1069,7 +1071,7 @@ def mill():
 
     # *** SEARCH FUNCTION *************************************
     def searchfun():
-        df = pd.read_csv("Csv\\customers.csv")
+        df = pd.read_csv("Csv//customers.csv")
         df = pd.DataFrame(df)
         df.sort_values(['DateTime'],ascending=False,inplace=True)
         for i in range(len(df)):
@@ -1100,7 +1102,7 @@ def mill():
 
 
     def searchfunMill():
-        df = pd.read_csv("Csv\\customers.csv")
+        df = pd.read_csv("Csv//customers.csv")
         df = pd.DataFrame(df)
         # df.sort_values(['DateTime'],ascending=False,inplace=True)
         for i in range(len(df)):
@@ -1220,25 +1222,25 @@ def mill():
                                 phone1.get(),phone2.get(),0,
                                 recived.get(),remaning.get(),dueDate.get(),
                                 ("Payment Sent to " + Mname.get()),0,0,0,0,0,0,0]])
-        df.to_csv("Csv\\customers.csv",mode='a',header=None,index=None)
+        df.to_csv("Csv//customers.csv",mode='a',header=None,index=None)
 
         df2 = pd.DataFrame([[date_time,date_, Mname.get(),Maddress.get(),
                                 Mphone1.get(),0,0,
                                 0,Mremaning.get(),0,
                                 ("Payment Sent by " + name.get()),0,0,0,0,0,0,0]])
-        df2.to_csv("Csv\\customers.csv",mode='a',header=None,index=None)
+        df2.to_csv("Csv//customers.csv",mode='a',header=None,index=None)
             
         df3 = pd.DataFrame([[str(date_time),date_, name.get(),address.get(),
                             phone1.get(),phone2.get(),
                             " ",0
                             ]])
-        df3.to_csv("Csv\\advance.csv",mode='a',header=None,index=None)
+        df3.to_csv("Csv//advance.csv",mode='a',header=None,index=None)
             
         df4 = pd.DataFrame([[str(date_time),date_, Mname.get(),Maddress.get(),
                             Mphone1.get(),0,
                             " ",0
                             ]])
-        df4.to_csv("Csv\\advance.csv",mode='a',header=None,index=None)
+        df4.to_csv("Csv//advance.csv",mode='a',header=None,index=None)
 
         millPage.destroy()
     # *********************************************************
@@ -1269,6 +1271,7 @@ def records():
     recordPage = Toplevel()
 
     recordPage.geometry("999x599")
+    recordPage.title("Customers Record")
     recordPage.configure(bg = "#ffffff")
     # *** CANVAS **********************************************
     canvas = Canvas(
@@ -1282,7 +1285,7 @@ def records():
     canvas.place(x = 0, y = 0)
 
     # *** BACKGROUD IMAGE *************************************
-    background_img = PhotoImage(file = f"Images\customerRecord.png")
+    background_img = PhotoImage(file = f"Images/CustomerRecord.png")
     background = canvas.create_image(
         499, 62,
         image=background_img)
@@ -1326,11 +1329,11 @@ def records():
     def showname():
         global nouser
         nouser = Label(recordPage,text= "",background="#ffffff",font="height=20")
-        df = pd.read_csv("Csv\\customers.csv")
+        df = pd.read_csv("Csv//customers.csv")
         df = pd.DataFrame(df)
         df.sort_values(['DateTime'],ascending=True,inplace=True)
         df = df.loc[df["Name"]==name.get()]
-        df2 = pd.read_csv("Csv\\advance.csv")
+        df2 = pd.read_csv("Csv//advance.csv")
         df2 = pd.DataFrame(df2)
         df2.sort_values(['DateTime'],ascending=True,inplace=True)
         df2 = df2.loc[df2["Name"]==name.get()]
@@ -1360,8 +1363,6 @@ def records():
                 tree.insert(i,END,values=(item1,item2,item3,item4,item5,item6,item7,item8))
                 j = j+1
 
-
-
     # *********************************************************
 
     # *** CLEAR FUNCTION **************************************
@@ -1371,12 +1372,117 @@ def records():
         for i in tree.get_children():
             tree.delete(i)
     # *********************************************************
+    
+    # *** PDF FUNCTION ****************************************
+    def pdfFun():
+        class PDF(FPDF):
+            def header(self):
+                self.set_font('helvetica','B',25)
+                self.set_text_color(16, 104, 205)
+                self.cell(0,10,"Kamal Iron Store Chakwal")
+                self.ln(20)
+
+        pdf = PDF('P','mm','A4')
+        pdf.add_page()
+        pdf.set_font('helvetica','',16)
+        pdf.set_text_color(0,0,0)
+
+        global nouser
+        nouser = Label(recordPage,text= "",background="#ffffff",font="height=20")
+        df = pd.read_csv("Csv//customers.csv")
+        df = pd.DataFrame(df)
+        df.sort_values(['DateTime'],ascending=True,inplace=True)
+        df = df.loc[df["Name"]==name.get()]
+        df2 = pd.read_csv("Csv//advance.csv")
+        df2 = pd.DataFrame(df2)
+        df2.sort_values(['DateTime'],ascending=True,inplace=True)
+        df2 = df2.loc[df2["Name"]==name.get()]
+        global CustomerAdvance
+        CustomerAdvance=0
+        j = 0
+        for i in range(len(df)):
+                CustomerDate = df.iloc[j,1]
+                CustomerName = df.iloc[j,2]
+                CustomerAddress = df.iloc[j,3]
+                CustomerPhone1 = int(df.iloc[j,4])
+                CustomerAdvance = int(df2.iloc[j,7])
+                CustomerTotal = int(df.iloc[j,6])
+                CustomerRecived = int(df.iloc[j,7])
+                CustomerRemaning = int(df.iloc[j,8])
+                CustomerDueDate = df.iloc[j,9]
+                item1 = df.iloc[j,10]
+                item2 = df.iloc[j,11]
+                item3 = df.iloc[j,12]
+                item4 = df.iloc[j,13]
+                item5 = df.iloc[j,14]
+                item6 = df.iloc[j,15]
+                item7 = df.iloc[j,16]
+                item8 = df.iloc[j,17]
+                pdf.set_font('helvetica','',14)
+                pdf.set_text_color(0,0,0)
+                if(i<1):
+                    pdf.cell(15,0,"Name:")
+                    pdf.cell(45,0,CustomerName)
+                    pdf.cell(20,0,"Address:")
+                    pdf.cell(50,0,CustomerAddress)
+                    pdf.cell(22,0,"PhoneNo:")
+                    pdf.cell(40,0,str(CustomerPhone1))
+                    pdf.ln(15)
+                pdf.cell(30,10,"Date",border=True)
+                pdf.cell(30,10,"Advance",border=True)
+                pdf.cell(30,10,"Total",border=True)
+                pdf.cell(30,10,"Recived",border=True)
+                pdf.cell(30,10,"Remaning",border=True)
+                pdf.cell(30,10,"DueDate",border=True)
+                pdf.ln()
+                pdf.set_font('helvetica','',14)
+                pdf.cell(30,10,str(CustomerDate),border=True)
+                pdf.cell(30,10,str(CustomerAdvance),border=True)
+                pdf.cell(30,10,str(CustomerTotal),border=True)
+                pdf.cell(30,10,str(CustomerRecived),border=True)
+                pdf.cell(30,10,str(CustomerRemaning),border=True)
+                pdf.cell(30,10,str(CustomerDueDate),border=True)
+                pdf.ln(10)
+                if(str(item1)!="('', '0', '0')" and (item1)!=0):
+                    pdf.cell(180,10,str(item1),border=True)
+                    pdf.ln()
+                if(str(item2)!="('', '0', '0')"and str(item2)!=0):
+                    pdf.cell(180,10,str(item2),border=True)
+                    pdf.ln()
+                if(str(item3)!="('', '0', '0')"and (item3)!=0):
+                    pdf.cell(180,10,str(item3),border=True)
+                    pdf.ln()
+                if(str(item4)!="('', '0', '0')"and (item4)!=0):
+                    pdf.cell(180,10,str(item4),border=True)
+                    pdf.ln()
+                if(str(item5)!="('', '0', '0')"and (item5)!=0):
+                    pdf.cell(180,10,str(item5),border=True)
+                    pdf.ln()
+                if(str(item6)!="('', '0', '0')"and (item6)!=0):
+                    pdf.cell(180,10,str(item6),border=True)
+                    pdf.ln()
+                if(str(item7)!="('', '0', '0')"and (item7)!=0):
+                    pdf.cell(180,10,str(item7),border=True)
+                    pdf.ln()
+                if(str(item8)!="('', '0', '0')"and (item8)!=0):
+                    pdf.cell(180,10,str(item8),border=True)
+                    pdf.ln()
+                pdf.ln(10)
+                tree.insert("",END,iid=i,open=False,values=(CustomerDate,CustomerName,CustomerAddress,
+                                    CustomerPhone1,CustomerAdvance,CustomerTotal,CustomerRecived,CustomerRemaning,CustomerDueDate))
+                tree.insert(i,END,values=(item1,item2,item3,item4,item5,item6,item7,item8))
+                j = j+1
+        pdf.output("pdfs/kamaliron.pdf")
+
+    # *********************************************************
 
     # *** BUTTONS *********************************************
     SearchButton = Button(recordPage,text="Search",command=showname,padx=8,pady=5,background="#47B759",fg="#ffffff")
     SearchButton.place(x=733,y=70)
     ClearButton = Button(recordPage,text="Clear",command=clearfun,padx=8,pady=5,background="#db5353",fg="#ffffff")
     ClearButton.place(x=814,y=70)
+    ClearButton = Button(recordPage,text="PDF",command=pdfFun,padx=8,pady=5,background="#47B759",fg="#ffffff")
+    ClearButton.place(x=884,y=70)
     # *********************************************************
 
 
