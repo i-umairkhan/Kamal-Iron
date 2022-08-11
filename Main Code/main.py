@@ -1472,7 +1472,7 @@ def records():
                                     CustomerPhone1,CustomerAdvance,CustomerTotal,CustomerRecived,CustomerRemaning,CustomerDueDate))
                 tree.insert(i,END,values=(item1,item2,item3,item4,item5,item6,item7,item8))
                 j = j+1
-        pdf.output(str(CustomerName)+".pdf")
+        pdf.output("pdfs/kamaliron.pdf")
 
     # *********************************************************
 
