@@ -1446,25 +1446,25 @@ def records():
                 if(str(item1)!="('', '0', '0')" and (item1)!=0):
                     pdf.cell(180,10,str(item1),border=True)
                     pdf.ln()
-                if(str(item2)!="('', '0', '0')"and str(item2)==0):
+                if(str(item2)!="('', '0', '0')"and str(item2)!=0):
                     pdf.cell(180,10,str(item2),border=True)
                     pdf.ln()
-                if(str(item3)!="('', '0', '0')"and (item3)==0):
+                if(str(item3)!="('', '0', '0')"and (item3)!=0):
                     pdf.cell(180,10,str(item3),border=True)
                     pdf.ln()
-                if(str(item4)!="('', '0', '0')"and (item4)==0):
+                if(str(item4)!="('', '0', '0')"and (item4)!=0):
                     pdf.cell(180,10,str(item4),border=True)
                     pdf.ln()
-                if(str(item5)!="('', '0', '0')"and (item5)==0):
+                if(str(item5)!="('', '0', '0')"and (item5)!=0):
                     pdf.cell(180,10,str(item5),border=True)
                     pdf.ln()
-                if(str(item6)!="('', '0', '0')"and (item6)==0):
+                if(str(item6)!="('', '0', '0')"and (item6)!=0):
                     pdf.cell(180,10,str(item6),border=True)
                     pdf.ln()
-                if(str(item7)!="('', '0', '0')"and (item7)==0):
+                if(str(item7)!="('', '0', '0')"and (item7)!=0):
                     pdf.cell(180,10,str(item7),border=True)
                     pdf.ln()
-                if(str(item8)!="('', '0', '0')"and (item8)==0):
+                if(str(item8)!="('', '0', '0')"and (item8)!=0):
                     pdf.cell(180,10,str(item8),border=True)
                     pdf.ln()
                 pdf.ln(10)
